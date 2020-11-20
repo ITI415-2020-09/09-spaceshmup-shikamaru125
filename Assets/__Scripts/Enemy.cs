@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour {
+    public TextMeshProUGUI countText;
+    private int count;
 
     [Header("Set in Inspector: Enemy")]
     public float speed = 10f; // The speed in m/s
@@ -97,6 +100,9 @@ public class Enemy : MonoBehaviour {
                     notifiedOfDestruction = true;
                     // Destroy this enemy
                     Destroy(this.gameObject);
+                     count = count + 1;
+
+                    Hero.S.incrementCount();
                 }
                 Destroy(otherGO);
                 break;
@@ -106,7 +112,10 @@ public class Enemy : MonoBehaviour {
                 break;
         }
     }
-
+    void SetCountText()
+        {
+            countText.text = "Count: " + count.ToString();
+        }
     void ShowDamage()
     {
         foreach (Material m in materials)

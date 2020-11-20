@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Hero : MonoBehaviour {
     static public Hero S; // Singleton
+    public TextMeshProUGUI countText;
+    public TextMeshProUGUI shieldText;
+    private int count;
+
 
     [Header("Set in Inspector")]
     // These fields control the movement of the ship
@@ -30,6 +35,10 @@ public class Hero : MonoBehaviour {
 
 	void Start()
     {
+        count = 0;
+        SetCountText();
+        SetShieldText();
+
         if (S == null)
         {
             S = this; // Set the Singleton
@@ -44,7 +53,21 @@ public class Hero : MonoBehaviour {
         ClearWeapons();
         weapons[0].SetType(WeaponType.blaster);
     }
+    public void SetCountText()
+        {
+            countText.text = "Ships Destroyed: " + count.ToString();
+        }
+    public void SetShieldText()
+    {
+        shieldText.text = "Shields: " + shieldLevel.ToString();
+    }
 	
+    public void incrementCount()
+    {
+        count = count + 1;
+        SetCountText();
+    }
+   
 	// Update is called once per frame
 	void Update()
     {
@@ -138,6 +161,7 @@ public class Hero : MonoBehaviour {
         set
         {
             _shieldLevel = Mathf.Min(value, 4);
+            SetShieldText();
             // If the shield is going to be set to less than zero
             if (value < 0)
             {
