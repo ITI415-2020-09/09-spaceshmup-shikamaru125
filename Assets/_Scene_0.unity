@@ -1501,7 +1501,7 @@ MonoBehaviour:
     type: 3}
   projectilePrefab1: {fileID: 1899541879965282, guid: db7dd7dcc33013b4ba43aae7d2f5e1a5,
     type: 3}
-  projectileSpeed: 40
+  projectileSpeed: 50
   weapons:
   - {fileID: 1374778674}
   - {fileID: 2031523527}
